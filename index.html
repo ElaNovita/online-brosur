@@ -1,14 +1,110 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<title>Document</title>
-	<link rel="stylesheet" type="text/css" href="css/materialize.min.css">
+    <meta charset="UTF-8">
+    <title>Digilib | BP-PAUD dan Dikmas NTB</title>
+    <link rel="stylesheet" type="text/css" href="css/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="css/home-style.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style type="text/css">
+        body {
+            background-color: #eee;
+        }
+        li a {
+            color: rgba(0,0,0,0.85);
+        }
+        .archive_month ul {
+            display: none;
+        }
+        .posts p:nth-child(1) {
+            margin-top: 0
+        }
+        .custom-left-side {
+            background: #fff;
+            position: absolute;
+            height: 100%;
+        }
+        @media screen and (max-width: 720px) {
+            .custom-left-side {
+                position: relative;
+            }
+        }
+    </style>
 </head>
 <body>
-	
+    <!-- <div id="cloud-container"></div> -->
+    <div class="row">
+        <div class="col s12 m3 l3 custom-left-side">
+            <form method="GET" action=".">
+                <div class="row">
+                    <div class="input-field col s12">
+                        <i class="material-icons prefix">search</i>
+                        <input id="icon_pre1fix" type="text" class="validate" name="q">
+                        <label for="icon_prefix">Cari...</label>
+                    </div>
+                </div>
+            </form>
+            <ul class="archive_year">
+                <li><a href="/"><p class="custom-active">Beranda</p></a></li>
+                <li class="years "><a href="?c=1"><p class="custom-active">Title Post</p></a>
+                    <ul class="archive_month">
+                        <li class="months ">
+                            <a href="?c=2"><p class="custom-active">Subtitle <i class="expand-item material-icons">keyboard_arrow_right</i></p></a>
+                            {% if k2.kategori_set.exists %}
+                            <ul class="archive_posts">
+                                <li class="posts"><a href="?c=3"><p class="custom-active last-child">Child title</p></a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
 
-	<script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
-	<script type="text/javascript" src="js/materialize.min.js"></script>
+        <div class="col s12 m9 l9 offset-l3 offset-m3" style="padding: 48px">
+            <div class="row">
+                <div class="col s12">
+                    <h4 style="font-weight: 300;">Category Title</h4>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s12">
+                    <h4 style="font-weight: 300;">Pencarian: Search</h4>
+                </div>
+            </div>
+            <div class="hero">
+                <h3>Selamat Datang</h3>
+                <p style="font-size: 18px">Disini kami menyediakan data berupa peraturan-peraturan, model pengembangan, jurnal, buletin dan produk lainnya yang telah di digitalisasi anda dapat membaca sekaligus mendownload konten secara gratis. untuk permintaan informasi ataupun produk lainnya yang belum tersedia dapat melalui menu permohonan informasi laman e-ULT di alamat <a href="http://pauddikmasntb.kemdikbud.go.id/ult/">http://pauddikmasntb.kemdikbud.go.id/ult/</a>.
+                <br>Terima Kasih.</p>
+            </div>
+            <div class="custom-link">
+                <p><i class="material-icons">bookmark</i> Buku Terbaru</p>
+            </div>
+            {% endif %}
+
+            <div class="row">
+                <div class="col s12 m4 l4" style="text-align: center; height: 480px">
+                    <a href="{% url 'galeri-detail' obj.pk %}">
+                        <img style="background-color: #fff" src="" class="cover" style="width: 100%">
+                    </a>
+                   <p>Title</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="js/jquery.min.1.7.js"></script>
+    <script type="text/javascript" src="js/materialize.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $('.expand-item').click(function() {
+                $(this).parent().parent().find('ul').slideToggle();
+            });
+
+            if ($('.custom-active').hasClass('last-child')) {
+                $('.custom-active.last-child').parent().parent().slideDown();
+            }
+        });
+    </script>
 </body>
 </html>
